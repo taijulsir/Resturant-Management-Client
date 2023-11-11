@@ -4,6 +4,7 @@ import Hero from "./Hero";
 import HomeConatact from "./HomeConatact";
 import Menus from "./Menus";
 import Order from "./Order";
+import Testimonial from "./Testimonial";
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
            <Menus></Menus>
            <HomeConatact></HomeConatact>
            <FromMenu></FromMenu>
+           <Testimonial></Testimonial>
         </div>
     );
 };

@@ -12,7 +12,7 @@ const FromMenu = () => {
 
 
                 <div>
-                    <div className="mt-5 text-white" >
+                    <div className="mt-5 text-white font-normal" >
                         <SharedTitle heading={"Our Menu"} subHeading={"Check it Out"}></SharedTitle>
                     </div>
                     <div className="grid md:grid-cols-2 items-center gap-10 max-w-5xl max-md:max-w-md mx-auto">
