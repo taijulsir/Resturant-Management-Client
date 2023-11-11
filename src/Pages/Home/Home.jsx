@@ -1,5 +1,6 @@
 import Banner from "./Banner";
 import Hero from "./Hero";
+import Menus from "./Menus";
 import Order from "./Order";
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
            <Banner></Banner> 
            <Order></Order>
            <Hero></Hero>
+           <Menus></Menus>
         </div>
     );
 };
