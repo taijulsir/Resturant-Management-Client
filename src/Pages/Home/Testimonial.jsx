@@ -32,7 +32,7 @@ const Testimonial = () => {
 
             {/* reviews slider */}
             <section>
-                <Swiper  width={700} navigation={true} modules={[Navigation]} className="mySwiper">
+                <Swiper  height={700} navigation={true} modules={[Navigation]} className="mySwiper">
                     {reviews.map(review =>
                         <SwiperSlide key={review._id} className="text-center">
                             <div>
