@@ -5,8 +5,8 @@ const SharedDesign = ({ price, name, image, recipe }) => {
     return (
         <div>
             <div className=" flex justify-around items-center gap-8">
-                <div style={{borderRadius: '0 200px 200px 200px'}}>
-                    <img src={image} alt=""   className="h-[104px] w-[118px]"  />
+                <div >
+                    <img src={image} alt="" style={{borderRadius: '0 200px 200px 200px'}}  className="h-[104px] w-[118px]"  />
                 </div>
                 <div className="flex justify-between gap-5">
                     <div>
