@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import FromMenu from "./FromMenu";
 import Hero from "./Hero";
 import HomeConatact from "./HomeConatact";
 import Menus from "./Menus";
@@ -12,6 +13,7 @@ const Home = () => {
            <Hero></Hero>
            <Menus></Menus>
            <HomeConatact></HomeConatact>
+           <FromMenu></FromMenu>
         </div>
     );
 };
