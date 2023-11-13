@@ -7,7 +7,7 @@ const useMenu = () => {
     useEffect(() => {
         axios.get('/menu.json')
             .then(res => {
-                const data = res.data.filter(menu => menu.category === "popular")
+                const data = res.data
                 setMenus(data)
                 setLoading(false)
             })

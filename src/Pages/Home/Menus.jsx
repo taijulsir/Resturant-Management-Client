@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import useMenu from "../../Hooks/useMenu/useMenu";
 
 const Menus = () => {
+
     // const [menus, setMenus] = useState([])
     // useEffect(() => {
     //     axios.get('/menu.json')
@@ -16,7 +17,10 @@ const Menus = () => {
     //         .catch(error => console.log(error))
     // }, [])
     // console.log(menus)
+
     const [menus] = useMenu()
+    // const data = res.data.filter(menu => menu.category === "popular")
+    const popularMenu = menus.filter(menu=>menu.category === "popular")
     return (
         <div>
             <div>
@@ -25,7 +29,7 @@ const Menus = () => {
             </div>
             <section>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10 my-10">
-                    {menus.map(menu => <Menu key={menu._id} menu={menu}></Menu>)}
+                    {popularMenu.map(menu => <Menu key={menu._id} menu={menu}></Menu>)}
                 </div>
             </section>
             <div className="flex items-center justify-center">
