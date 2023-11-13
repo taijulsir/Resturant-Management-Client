@@ -8,7 +8,7 @@ const Navbar = () => {
 
             <li className=" uppercase text-base mr-2  font-medium"><NavLink to="/" >Home</NavLink></li>
             <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/ourMenu" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400 " : ""}>Our Menu</NavLink></li>
-            <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/ourShop" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Our Shop</NavLink></li>
+            <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/ourShop/salad" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Our Shop</NavLink></li>
             <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Dashboard</NavLink></li>
             <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/contactUs" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>ContactUs</NavLink></li>
            

@@ -8,15 +8,17 @@ import { useParams } from "react-router-dom";
 
 const OurShop = () => {
     const [menus] = useMenu()
+    const categories = ['salad','pizza','soup','dessert','drink']
     const {category} = useParams()
     console.log(category)
-    const [index, setIndex] = useState(0)
+    const initialIndex = categories.indexOf(category)
+    console.log(initialIndex)
+    const [index, setIndex] = useState(initialIndex)
     const saladMenu = menus.filter(menu => menu.category === "salad")
     const dessertMenu = menus.filter(menu => menu.category === "dessert")
     const pizzaMenu = menus.filter(menu => menu.category === "pizza")
     const soupMenu = menus.filter(menu => menu.category === "soup")
     const drinksMenu = menus.filter(menu => menu.category === "drinks")
-    console.log(index)
     return (
         <div>
             <div>
@@ -24,12 +26,12 @@ const OurShop = () => {
             </div>
             <div className="my-[130px] text-center">
                 <Tabs defaultIndex={index} onSelect={(index) => setIndex(index)}>
-                    <TabList>
-                        <Tab >SALAD</Tab>
-                        <Tab>PIZZA</Tab>
-                        <Tab>SOUPS</Tab>
-                        <Tab>DESSERTS</Tab>
-                        <Tab>DRINKS</Tab>
+                    <TabList  className="uppercase">
+                        <Tab>salad</Tab>
+                        <Tab>pizza</Tab>
+                        <Tab>soup</Tab>
+                        <Tab>dessert</Tab>
+                        <Tab>drink</Tab>
                     </TabList>
 
 
