@@ -17,7 +17,7 @@ import Rating from "react-rating";
 const Testimonial = () => {
     const [reviews, setReviews] = useState([])
     useEffect(() => {
-        axios.get('/reviews.json')
+        axios.get('http://localhost:5000/review')
             .then(res => {
                 setReviews(res.data)
             })
