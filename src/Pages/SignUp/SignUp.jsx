@@ -1,12 +1,32 @@
+
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+
 
 
 const SignUp = () => {
-    const {
-        register, handleSubmit, formState: { errors }, } = useForm()
+
+    const { createUser, logOut,profileUpdate } = useContext(AuthContext)
+    const navigate = useNavigate()
+    const { register, handleSubmit, formState: { errors }, } = useForm()
     const onSubmit = (data) => {
         console.log(data)
+        createUser(data.email, data.password)
+            .then(result => {
+                console.log(result.user)
+                profileUpdate(data.name,data.photoUrl)
+                logOut()
+                navigate("/login")
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'Sign up successful.',
+                });
+            })
+            .catch(error => console.log(error.message))
     }
     return (
         <div>
@@ -17,7 +37,6 @@ const SignUp = () => {
                             {/* form part */}
                             <div className="font-[sans-serif] text-[#333] mt-4 p-4 relative">
                                 <div className="max-w-md w-full mx-auto relative z-50">
-
                                     <div className="border border-gray-300 bg-white rounded-md p-8">
                                         <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
                                             <div className="mb-6">
@@ -104,10 +123,10 @@ const SignUp = () => {
                                                     <div className="flex items-center">
                                                         <input required id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
                                                         <label htmlFor="remember-me" className="ml-3 block text-sm">
-                                                            I accept the <a href="javascript:void(0);" className="text-blue-600 font-semibold hover:underline ml-1">Terms and Conditions</a>
+                                                            I accept the <a className="text-blue-600 font-semibold hover:underline ml-1">Terms and Conditions</a>
                                                         </label>
                                                     </div>
-                                                   
+
                                                 </div>
                                             </div>
                                             <div className="!mt-10">

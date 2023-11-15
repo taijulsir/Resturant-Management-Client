@@ -1,22 +1,35 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { BsCart4 } from "react-icons/bs";
+import useCarts from "../Hooks/useCarts/useCarts";
 
 const Navbar = () => {
 
+    const [cart] = useCarts()
+    console.log(cart)
+    const {user,logOut} = useContext(AuthContext) 
+    console.log(user)
+    const handleSignOUt = () =>{
+        logOut()
+        .then(()=>{})
+        .catch(error=>console.log(error.message))
+    }
     const navlinks =
         <>
 
-            <li className=" uppercase text-base mr-2  font-medium"><NavLink to="/" >Home</NavLink></li>
-            <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/ourMenu" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400 " : ""}>Our Menu</NavLink></li>
-            <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/ourShop/salad" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Our Shop</NavLink></li>
-            <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Dashboard</NavLink></li>
-            <li className=" uppercase text-base mr-2   shadow-md font-medium"><NavLink to="/contactUs" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>ContactUs</NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/" >Home</NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/ourMenu" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400 " : ""}>Our Menu</NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/ourShop/salad" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Our Food</NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/dashboard/cart" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Cart <BsCart4 className="text-2xl"></BsCart4><div className="badge badge-primary" >+{cart.length}</div></NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Dashboard</NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/contactUs" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>ContactUs</NavLink></li>
            
         </>
 
     return (
         <div>
-            <div className="navbar bg-black bg-opacity-30 container mx-auto  z-10 fixed">
+            <div className="navbar  bg-opacity-30 container mx-auto  z-10 fixed">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -34,7 +47,18 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-               <Link to='/login'><button className="btn bg-slate-100">Login</button></Link>
+                {user ? <div className="dropdown dropdown-end">
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                            <img src={user.photoURL} />
+                        </div>
+                    </label>
+                    <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52">
+
+                        <li className="text-xl font-medium px-1">{user.displayName}</li>
+                        <li><button className="text-xl" onClick={handleSignOUt}>Logout</button></li>
+                    </ul>
+                </div> : <Link to="/login"><button className="btn bg-amber-400 font-bold"> Login</button></Link>}
                 </div>
             </div>
         </div>

@@ -1,19 +1,22 @@
-import { useContext, useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect,  useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [disabled, setDisabled] = useState(true)
-    const captchaRef = useRef(null)
     const {signIn} = useContext(AuthContext)
+    const location = useLocation()
+    const navigate = useNavigate()
+    console.log(location.state)
 
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
 
-    const handleValidate = () =>{
-        const user_captcha_value = captchaRef.current.value;
+    const handleValidate = (e) =>{
+        const user_captcha_value = e.target.value;
         if(validateCaptcha(user_captcha_value)===true){
             setDisabled(false)
         }
@@ -22,17 +25,22 @@ const Login = () => {
         }
        
     }
-
     const handleLogin = (e) => {
         e.preventDefault()
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password)
         signIn(email,password)
         .then(result=>{
             const user = result.user;
             console.log(user)
+            navigate(location?.state? location.state : "/")
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: 'Logged in successful.',
+              });
+              
         })
         .catch(error=>console.log(error.message))
     }
@@ -87,12 +95,12 @@ const Login = () => {
                                     </label>
                                     <div className="flex items-center justify-between gap-2">
                                         <div className="relative flex items-center flex-1">
-                                            <input name="captcha" ref={captchaRef} type="text" required className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#333]" placeholder="Type above code" />
+                                            <input name="captcha" onBlur={handleValidate}  type="text" required className="w-full text-sm border border-gray-300 px-4 py-3 rounded-md outline-[#333]" placeholder="Type above code" />
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="#bbb" stroke="#bbb" className="w-[18px] h-[18px] absolute right-4 cursor-pointer" viewBox="0 0 128 128">
                                                 <path d="M64 104C22.127 104 1.367 67.496.504 65.943a4 4 0 0 1 0-3.887C1.367 60.504 22.127 24 64 24s62.633 36.504 63.496 38.057a4 4 0 0 1 0 3.887C126.633 67.496 105.873 104 64 104zM8.707 63.994C13.465 71.205 32.146 96 64 96c31.955 0 50.553-24.775 55.293-31.994C114.535 56.795 95.854 32 64 32 32.045 32 13.447 56.775 8.707 63.994zM64 88c-13.234 0-24-10.766-24-24s10.766-24 24-24 24 10.766 24 24-10.766 24-24 24zm0-40c-8.822 0-16 7.178-16 16s7.178 16 16 16 16-7.178 16-16-7.178-16-16-16z" data-original="#000000"></path>
                                             </svg>
                                         </div>
-                                        <button onClick={handleValidate} className="btn bg-slate-900 text-white">Validate</button>
+                                       
                                     </div>
 
                                 </div>
