@@ -8,8 +8,11 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart/Cart";
+import PrivateRoute from "../PrivateRoute/PrivateRoute"
+import AllUsers from "../Pages/Dashboard/AllUsers/AllUsers";
 
 const router = createBrowserRouter([
+    // for all routes
     {
         path: "/",
         errorElement: <ErrorPage></ErrorPage>,
@@ -30,21 +33,32 @@ const router = createBrowserRouter([
             
         ]
     },
+
+    // login routes
     {
         path: "/login",
         element: <Login></Login>
     },
+
+    // register routes
     {
         path: "/register",
         element: <SignUp></SignUp>
     },
+
+    // dashboard routes
     {
         path: 'dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
                 path: 'cart',
                 element: <Cart></Cart>
+            },
+        // admin routes
+            {
+                path: 'allusers',
+                element: <AllUsers></AllUsers>
             }
         ]
     }

@@ -1,11 +1,42 @@
+import Swal from "sweetalert2";
 import SharedTitle from "../../../Components/SharedTitle/SharedTitle";
 import useCarts from "../../../Hooks/useCarts/useCarts";
 import { AiOutlineDelete } from "react-icons/ai";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
 
 const Cart = () => {
-    const [cart] = useCarts()
+    const [cart,refetch] = useCarts()
     const totalPrice = cart.reduce((sum, item) => sum + item.price, 0)
-    const handleDelte = () => {
+    const axiosSecure = useAxiosSecure()
+    const handleDelte = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure.delete(`carts/${id}`)
+                .then(res=>{
+                   
+                   if(res.data.deletedCount >0){
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                      });
+                       refetch()
+                   }
+                     
+
+                })
+                .catch(error => console.log(error))
+             
+            }
+          });
 
     }
     return (
@@ -35,7 +66,7 @@ const Cart = () => {
                       
                            {cart.map((item,index)=> <tr key={item._id}>
                                 <td>
-                                 {index}  
+                                 {index +1}  
                                 </td>
                                 <td>
                                     <div className="flex items-center gap-3">
@@ -53,7 +84,7 @@ const Cart = () => {
                                 </td>
                                 <td>{item.price}</td>
                                 <th>
-                                    <button onClick={()=>handleDelte(cart._id)} className="btn bg-red-500"><AiOutlineDelete className="text-2xl text-white font-bold"></AiOutlineDelete></button>
+                                    <button onClick={()=>handleDelte(item._id)} className="btn bg-red-500"><AiOutlineDelete className="text-2xl text-white font-bold"></AiOutlineDelete></button>
                                 </th>
                             </tr>
                           )}

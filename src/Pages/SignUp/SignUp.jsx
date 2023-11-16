@@ -4,30 +4,47 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic/useAxiosPublic";
+import SocialLogin from "../../Components/SocialLogin/SocialLogin";
 
 
 
 const SignUp = () => {
 
-    const { createUser, logOut,profileUpdate } = useContext(AuthContext)
+    const axiosPublic = useAxiosPublic()
+    const { createUser, logOut, profileUpdate } = useContext(AuthContext)
     const navigate = useNavigate()
-    const { register, handleSubmit, formState: { errors }, } = useForm()
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm()
     const onSubmit = (data) => {
         console.log(data)
         createUser(data.email, data.password)
             .then(result => {
                 console.log(result.user)
-                profileUpdate(data.name,data.photoUrl)
-                logOut()
-                navigate("/login")
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success!',
-                    text: 'Sign up successful.',
-                });
+                profileUpdate(data.name, data.photoUrl)
+                const authInfo = {
+                    name: data.name,
+                    email: data.email,
+                }
+                axiosPublic.post('/users', authInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Sign up successful.',
+                            });
+                            reset()
+                            logOut()
+                            navigate("/login")
+                        }
+                    })
+
+
             })
             .catch(error => console.log(error.message))
     }
+
+
     return (
         <div>
             <div>
@@ -135,6 +152,9 @@ const SignUp = () => {
                                                 </button>
                                             </div>
                                             <p className="text-sm mt-6 text-center">Already have an account? <Link to="/login" className="text-blue-600 font-semibold hover:underline ml-1">Login here</Link></p>
+                                            <div className="mt-4">
+                                                <SocialLogin></SocialLogin>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
