@@ -21,7 +21,7 @@ const Navbar = () => {
             <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/" >Home</NavLink></li>
             <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/ourMenu" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400 " : ""}>Our Menu</NavLink></li>
             <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/ourShop/salad" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Our Food</NavLink></li>
-            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/dashboard/cart" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Cart <BsCart4 className="text-2xl"></BsCart4><div className="badge badge-primary" >+{cart.length}</div></NavLink></li>
+            <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Cart <BsCart4 className="text-2xl"></BsCart4><div className="badge badge-primary" >+{cart.length}</div></NavLink></li>
             <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/dashboard" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>Dashboard</NavLink></li>
             <li className=" uppercase text-base mr-2 text-amber-500  font-medium"><NavLink to="/contactUs" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "active text-amber-400" : ""}>ContactUs</NavLink></li>
            

@@ -126,8 +126,8 @@ const Login = () => {
                                     
                                 </div>
                                 <p className="text-sm !mt-10 text-center">Don`t have an account <Link to="/register" className="text-blue-600 hover:underline ml-1 whitespace-nowrap">Register here</Link></p>
-                                <SocialLogin></SocialLogin>
                             </form>
+                                <SocialLogin></SocialLogin>
                         </div>
 
                     </div>

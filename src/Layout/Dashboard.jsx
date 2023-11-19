@@ -1,10 +1,11 @@
-import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHamburger, FaHome, FaList, FaShoppingCart, FaUser, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaAd, FaBook, FaCalendar, FaEnvelope, FaHamburger, FaHome, FaList, FaShoppingCart, FaUsers, FaUtensils } from "react-icons/fa";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../Hooks/useAdmin/useAdmin";
 
 
 const Dashboard = () => {
 
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     return (
         <div className="flex">
             <div className="w-64 min-h-screen bg-orange-600">
@@ -13,6 +14,7 @@ const Dashboard = () => {
                     {
                         isAdmin ?
                             <>
+                            {/* admin routes */}
                                 <li><NavLink to="/dashboard/adminHome"><FaHome className="text-2xl"></FaHome>Admin Home</NavLink></li>
                                 <li><NavLink to="/dashboard/addItems"><FaUtensils className="text-2xl"></FaUtensils>Add Items</NavLink></li>
                                 <li><NavLink to="/dashboard/manageItems"><FaList className="text-2xl"></FaList>Manage Items</NavLink></li>
@@ -20,6 +22,7 @@ const Dashboard = () => {
                                 <li><NavLink to="/dashboard/allUsers"><FaUsers className="text-2xl"></FaUsers>All Users</NavLink></li>
                             </> :
                             <>
+                            {/* user routes */}
                                 <li><NavLink to="/dashboard/userHome"><FaHome className="text-2xl"></FaHome>User Home</NavLink></li>
                                 <li><NavLink to="/dashboard/reservation"><FaCalendar className="text-2xl"></FaCalendar>Reservation</NavLink></li>
                                 <li><NavLink to="/dashboard/cart"><FaShoppingCart className="text-2xl"></FaShoppingCart>My cart</NavLink></li>

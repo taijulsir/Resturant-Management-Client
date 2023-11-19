@@ -3,6 +3,7 @@ import SharedTitle from "../../../Components/SharedTitle/SharedTitle";
 import useCarts from "../../../Hooks/useCarts/useCarts";
 import { AiOutlineDelete } from "react-icons/ai";
 import useAxiosSecure from "../../../Hooks/useAxiosSecure/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const [cart,refetch] = useCarts()
@@ -46,7 +47,8 @@ const Cart = () => {
                 <div className=" flex justify-evenly py-14">
                     <h3 className="text-2xl font-bold">Total Orders: <span className="text-amber-600">{cart.length}</span> </h3>
                     <h3 className="text-2xl font-bold">Total Price: ${totalPrice} </h3>
-                    <h3 className="px-3 py-2 bg-amber-700 text-white font-bold">Pay</h3>
+                   {cart.length ? <Link to="/dashboard/payment"> <button className="btn  bg-amber-700 font-bold">Pay</button></Link> :
+                  <button disabled className="btn  bg-amber-700 font-bold">Pay</button> }
                 </div>
             </div>
             <div>
